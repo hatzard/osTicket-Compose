@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.5.62
+    restart: always
+    ports:
+      - "52000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_DATABASE: osticket
+      MYSQL_USER: ost_user
+      MYSQL_PASSWORD: ost_pass
+    volumes:
+      - osticket-db:/var/lib/mysql
+    networks:
+      - osticket-network
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+#    image: osticket/osticket:v1.15.3 #Create and Upload Dockerfile, this option is here in case you wanna to upload your own Docker Image instead to Dockerhub.
+    image: osticket_v1.17.3
+#    container: osticket_app
+    restart: always
+    ports:
+      - "9080:80" #Check and modify this ports accordingly
+    environment:
+      OST_DB_HOST: ost-man-db:3306
+      OST_DB_NAME: osticket
+      OST_DB_USER: ost_user
+      OST_DB_PASS: ost_pass
+   #   MYSQL_ROOT_PASSWORD: osticket
+   #   MYSQL_DATABASE: osticket
+   #   MYSQL_USER: osticket
+   #   MYSQL_PASSWORD: osticket
+    depends_on:
+      - db
+    volumes:
+      - osticket-web:/var/log/html
+    networks:
+      - osticket-network
+
+volumes:
+  osticket-db:
+  osticket-web:
+
+networks:
+  osticket-network:
+
+    
+
+    
