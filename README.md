@@ -8,9 +8,9 @@ I created this so you can use osTicket System with Docker!
 I have created this composed with the following versions (up to date by the time of creation):
 
 
-MySQL: 5.5.62 (Min required)
-OSTicket: 1.17.3 (latest version)
-PHP Version 8.0 Apache (min required for this version as well)
+- MySQL: 5.5.62 (min required)
+- OSTicket: 1.17.3 (latest version available at this time)
+- PHP Version 8.0 Apache (min required for this version as well)
 
 
 # Usage
